@@ -600,11 +600,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4391048802776764732}
+  - component: {fileID: 8124061484715582679}
   - component: {fileID: 6158305107595506144}
+  - component: {fileID: 4079302597528827705}
+  - component: {fileID: 8535773277545400143}
   - component: {fileID: 5270490335184524987}
   - component: {fileID: 7569008595495316687}
-  - component: {fileID: 8535773277545400143}
-  - component: {fileID: 4079302597528827705}
+  - component: {fileID: 4357871927468708966}
   m_Layer: 0
   m_Name: Demonic Beast
   m_TagString: Untagged
@@ -629,6 +631,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!195 &8124061484715582679
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2555890604983027352}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 1
+  m_Acceleration: 0
+  avoidancePriority: 50
+  m_AngularSpeed: 0
+  m_StoppingDistance: 1
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1.85
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!143 &6158305107595506144
 CharacterController:
   m_ObjectHideFlags: 0
@@ -647,6 +671,44 @@ CharacterController:
   m_SkinWidth: 0.03
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0.88, z: 0}
+--- !u!95 &4079302597528827705
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2555890604983027352}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a56e96bbce44a7044b00402fc320fb53, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8535773277545400143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2555890604983027352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc04b46f61d6ead448d3cbd44df963c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Animator>k__BackingField: {fileID: 4079302597528827705}
+  <NavMeshAgent>k__BackingField: {fileID: 8124061484715582679}
+  <CharacterController>k__BackingField: {fileID: 6158305107595506144}
+  <ForceReceiver>k__BackingField: {fileID: 4357871927468708966}
+  <PlayerDetectionRange>k__BackingField: 10
+  <MovementSpeed>k__BackingField: 4
 --- !u!114 &5270490335184524987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -672,7 +734,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 100
---- !u!114 &8535773277545400143
+--- !u!114 &4357871927468708966
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -681,29 +743,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2555890604983027352}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc04b46f61d6ead448d3cbd44df963c6, type: 3}
+  m_Script: {fileID: 11500000, guid: d030c52da63d10d4aa86e5760f7f4ec3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!95 &4079302597528827705
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2555890604983027352}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a56e96bbce44a7044b00402fc320fb53, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  controller: {fileID: 6158305107595506144}
+  drag: 0.3
 --- !u!1 &2574791437645676032
 GameObject:
   m_ObjectHideFlags: 0
