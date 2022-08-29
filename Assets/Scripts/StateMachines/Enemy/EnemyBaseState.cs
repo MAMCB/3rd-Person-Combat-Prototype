@@ -4,9 +4,9 @@ using UnityEngine;
 
 public abstract class EnemyBaseState : State
 {
-    protected EnemyBaseState stateMachine;
+    protected EnemyStateMachine stateMachine;
 
-    public EnemyBaseState(EnemyBaseState stateMachine)
+    public EnemyBaseState(EnemyStateMachine stateMachine)
     {
         this.stateMachine = stateMachine;
     }

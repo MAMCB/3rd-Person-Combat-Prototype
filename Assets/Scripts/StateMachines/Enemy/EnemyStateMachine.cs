@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class EnemyStateMachine : StateMachine
 {
-    
+    [field: SerializeField] public Animator Animator { get; private set; }
 }

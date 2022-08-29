@@ -604,6 +604,7 @@ GameObject:
   - component: {fileID: 5270490335184524987}
   - component: {fileID: 7569008595495316687}
   - component: {fileID: 8535773277545400143}
+  - component: {fileID: 4079302597528827705}
   m_Layer: 0
   m_Name: Demonic Beast
   m_TagString: Untagged
@@ -683,6 +684,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc04b46f61d6ead448d3cbd44df963c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &4079302597528827705
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2555890604983027352}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a56e96bbce44a7044b00402fc320fb53, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2574791437645676032
 GameObject:
   m_ObjectHideFlags: 0
