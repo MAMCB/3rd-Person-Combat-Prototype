@@ -64,8 +64,8 @@ public class PlayerStateMachine : StateMachine
 
     private void Update()
     {
-        //Debug.Log(currentState);
-        currentState?.Tick(Time.deltaTime);
+        
+      currentState?.Tick(Time.deltaTime);
         if(SwordActive || AxeActive)
         {
             WeaponActive = true;

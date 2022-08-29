@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,9 +28,19 @@ public class EnemyChasingState : EnemyBaseState
             return;
         }
 
+        else if(IsInAttackRange())
+        {
+            stateMachine.SwitchState(new EnemyAttackingState(stateMachine));
+            return;
+        }
+
         MoveToPlayer(deltatime);
+        FacePlayer();
         stateMachine.Animator.SetFloat(SpeedHash, 1f, AnimatorDampTime, deltatime);
+        
     }
+
+    
 
     public override void Exit()
     {
@@ -44,5 +55,10 @@ public class EnemyChasingState : EnemyBaseState
         stateMachine.NavMeshAgent.velocity = stateMachine.CharacterController.velocity;
     }
 
-    
+    private bool IsInAttackRange()
+    {
+        float playerDistanceSqr = (stateMachine.Player.transform.position - stateMachine.transform.position).sqrMagnitude;
+        return playerDistanceSqr <= stateMachine.AttackRange * stateMachine.AttackRange;
+    }
+
 }
