@@ -8,7 +8,7 @@ public class Targeter : MonoBehaviour
     [SerializeField] private CinemachineTargetGroup cineTargetGroup;
     private Camera MainCamera;
     private List<Target> targets = new List<Target>();
-    public Target currentTarget { get; private set; }
+    public Target currentTarget; //{ get; private set; }
 
     private void Start()
     {

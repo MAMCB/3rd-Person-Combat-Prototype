@@ -9,6 +9,8 @@ public class Health : MonoBehaviour
     [SerializeField] bool isPlayer;
     private int health;
     public event Action OnTakeDamage;
+    public event Action OnDie;
+    private bool isInvulnerable;
     
     void Start()
     {
@@ -17,28 +19,27 @@ public class Health : MonoBehaviour
 
     public void DealDamage(int damage)
     {
-        if(health==0)
-        {if (!isPlayer)
-            {
-                Destroy(gameObject); return;
-            }
-         else
-            {
-                Debug.Log("Player is Dead");
-            }
-        
+        if (health == 0)
+        {
+            return;
         }
+        if(isInvulnerable) { return; }
+           
         health = Mathf.Max(health - damage, 0);
         OnTakeDamage?.Invoke();
+        if (health == 0)
+        {
+            OnDie?.Invoke();
 
-        if (!isPlayer)
-        {
-            Debug.Log("Enemy health is:" + health);
+
         }
-        else
-        {
-            Debug.Log("Player health is:" + health);
-        }
+
+
+    }
+
+    public void SetInvulnerable(bool isInvulnerable)
+    {
+        this.isInvulnerable = isInvulnerable;
     }
 
     

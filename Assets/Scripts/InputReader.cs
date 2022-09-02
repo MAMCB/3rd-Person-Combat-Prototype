@@ -12,7 +12,8 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     public bool Weapon1;
     public bool Weapon2;
     public bool SheatWeapon;
-    
+    public bool IsBlocking { get; private set; }
+
     public event Action DodgeEvent;
     public event Action TargetEvent;
     public event Action CancelEvent;
@@ -112,6 +113,18 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
         if (context.performed)
         {
             SheatWeapon = true;
+        }
+    }
+
+    public void OnBlock(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            IsBlocking = true;
+        }
+        else if (context.canceled)
+        {
+            IsBlocking = false;
         }
     }
 }

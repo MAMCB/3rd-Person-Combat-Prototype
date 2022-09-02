@@ -13,6 +13,10 @@ public class PlayerStateMachine : StateMachine
 
     [field: SerializeField] public Targeter Targeter { get; private set; }
     [field: SerializeField] public Health Health { get; private set; }
+    [field: SerializeField] public Ragdoll Ragdoll { get; private set; }
+
+  //  [field: SerializeField] public GameObject shieldWall { get; private set; }
+
 
     [field: SerializeField] public float FreeLookMovementWalkingSpeed { get; private set; }
     [field: SerializeField] public float FreeLookMovementRunningSpeed { get; private set; }
@@ -58,6 +62,7 @@ public class PlayerStateMachine : StateMachine
     private void OnEnable()
     {
         Health.OnTakeDamage += HandleTakeDamage;
+        Health.OnDie += HandleDeath;
     }
     // Start is called before the first frame update
     void Start()
@@ -87,11 +92,21 @@ public class PlayerStateMachine : StateMachine
         SwitchState(new PlayerImpactState(this));
     }
 
+    private void HandleDeath()
+    {
+        SwitchState(new PlayerDeadState(this));
+    }
+
     private void OnDisable()
     {
         Health.OnTakeDamage -= HandleTakeDamage;
+        Health.OnDie -= HandleDeath;
     }
 
+    public void ChangeTarget(Target newTarget)
+    {
+        Targeter.currentTarget = newTarget;
+    }
 
 
 
