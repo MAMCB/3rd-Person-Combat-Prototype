@@ -12,6 +12,7 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public ForceReceiver ForceReceiver { get; private set; }
 
     [field: SerializeField] public Targeter Targeter { get; private set; }
+    [field: SerializeField] public Health Health { get; private set; }
 
     [field: SerializeField] public float FreeLookMovementWalkingSpeed { get; private set; }
     [field: SerializeField] public float FreeLookMovementRunningSpeed { get; private set; }
@@ -53,10 +54,15 @@ public class PlayerStateMachine : StateMachine
     
 
     public Transform MainCameraTransform { get; private set; }
+
+    private void OnEnable()
+    {
+        Health.OnTakeDamage += HandleTakeDamage;
+    }
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Player state Machine initialized");
+        
         MainCameraTransform = Camera.main.transform;
         SwitchState(new PlayerFreeLookState(this));
         
@@ -76,7 +82,15 @@ public class PlayerStateMachine : StateMachine
         }
     }
 
+    private void HandleTakeDamage()
+    {
+        SwitchState(new PlayerImpactState(this));
+    }
 
+    private void OnDisable()
+    {
+        Health.OnTakeDamage -= HandleTakeDamage;
+    }
 
 
 

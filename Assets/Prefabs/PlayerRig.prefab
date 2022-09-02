@@ -640,7 +640,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5603706430864437337}
-  m_LocalRotation: {x: 0.14411141, y: -0.000056537396, z: 0.00000823363, w: 0.9895615}
+  m_LocalRotation: {x: 0.14411141, y: -0.00005652037, z: 0.00000823115, w: 0.9895615}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -972,7 +972,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5603706431189937709}
-  m_LocalRotation: {x: 0.10807054, y: -0.000056794877, z: 0.000006174013, w: 0.99414325}
+  m_LocalRotation: {x: 0.10807054, y: -0.000056794877, z: 0.0000061740134, w: 0.99414325}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1796,6 +1796,46 @@ PrefabInstance:
     - target: {fileID: 8547416039627031483, guid: d6407f1e5c385ad46b2101edcc3181a6, type: 3}
       propertyPath: audioSource
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8547416039627031483, guid: d6407f1e5c385ad46b2101edcc3181a6, type: 3}
+      propertyPath: <LowAxeAttack>k__BackingField.<Knockback>k__BackingField
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8547416039627031483, guid: d6407f1e5c385ad46b2101edcc3181a6, type: 3}
+      propertyPath: <HighAxeAttack>k__BackingField.<Knockback>k__BackingField
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8547416039627031483, guid: d6407f1e5c385ad46b2101edcc3181a6, type: 3}
+      propertyPath: <LowSwordAttack>k__BackingField.<Knockback>k__BackingField
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8547416039627031483, guid: d6407f1e5c385ad46b2101edcc3181a6, type: 3}
+      propertyPath: <HighSwordAttack>k__BackingField.<Knockback>k__BackingField
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8547416039627031483, guid: d6407f1e5c385ad46b2101edcc3181a6, type: 3}
+      propertyPath: <AxeAttacks>k__BackingField.Array.data[0].<Knockback>k__BackingField
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8547416039627031483, guid: d6407f1e5c385ad46b2101edcc3181a6, type: 3}
+      propertyPath: <AxeAttacks>k__BackingField.Array.data[1].<Knockback>k__BackingField
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8547416039627031483, guid: d6407f1e5c385ad46b2101edcc3181a6, type: 3}
+      propertyPath: <AxeAttacks>k__BackingField.Array.data[2].<Knockback>k__BackingField
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8547416039627031483, guid: d6407f1e5c385ad46b2101edcc3181a6, type: 3}
+      propertyPath: <SwordAttacks>k__BackingField.Array.data[0].<Knockback>k__BackingField
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8547416039627031483, guid: d6407f1e5c385ad46b2101edcc3181a6, type: 3}
+      propertyPath: <SwordAttacks>k__BackingField.Array.data[1].<Knockback>k__BackingField
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8547416039627031483, guid: d6407f1e5c385ad46b2101edcc3181a6, type: 3}
+      propertyPath: <SwordAttacks>k__BackingField.Array.data[2].<Knockback>k__BackingField
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8753614936297003954, guid: d6407f1e5c385ad46b2101edcc3181a6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

@@ -611,7 +611,7 @@ GameObject:
   - component: {fileID: 3498663707495096829}
   m_Layer: 0
   m_Name: Demonic Beast
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -708,12 +708,15 @@ MonoBehaviour:
   <Animator>k__BackingField: {fileID: 4079302597528827705}
   <NavMeshAgent>k__BackingField: {fileID: 8124061484715582679}
   <Weapon>k__BackingField: {fileID: 8940160240163044634}
+  <Health>k__BackingField: {fileID: 7569008595495316687}
   <CharacterController>k__BackingField: {fileID: 6158305107595506144}
   <ForceReceiver>k__BackingField: {fileID: 4357871927468708966}
   <PlayerDetectionRange>k__BackingField: 10
   <AttackRange>k__BackingField: 1
   <AttackDamage>k__BackingField: 20
+  <AttackKnockback>k__BackingField: 15
   <MovementSpeed>k__BackingField: 4
+  AttackMissed: 0
 --- !u!114 &5270490335184524987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -753,6 +756,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 6158305107595506144}
+  agent: {fileID: 8124061484715582679}
   drag: 0.3
 --- !u!114 &3498663707495096829
 MonoBehaviour:
@@ -1752,6 +1756,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 52fa067c25c5c401b811eb86d142287e, type: 3}
   - {fileID: 8300000, guid: b76357a42d03a4722afcba74c3073136, type: 3}
   audioSource: {fileID: 5407652207060514874}
+  enemyStateMachine: {fileID: 8535773277545400143}
+  isEnemy: 1
 --- !u!82 &5407652207060514874
 AudioSource:
   m_ObjectHideFlags: 0

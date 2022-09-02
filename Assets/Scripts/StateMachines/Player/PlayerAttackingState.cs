@@ -64,12 +64,12 @@ public class PlayerAttackingState : PlayerBaseState
     {
         if (Sword == stateMachine.currentWeapon.WeaponName)
         {
-            stateMachine.WeaponDamageSword.SetAttack(attack.Damage);
+            stateMachine.WeaponDamageSword.SetAttack(attack.Damage,attack.Knockback);
         }
 
         if (Axe == stateMachine.currentWeapon.WeaponName)
         {
-            stateMachine.WeaponDamageAxe.SetAttack(attack.Damage);
+            stateMachine.WeaponDamageAxe.SetAttack(attack.Damage,attack.Knockback);
         }
 
 
@@ -83,7 +83,7 @@ public class PlayerAttackingState : PlayerBaseState
     {
         Move(deltatime);
         FaceTarget();
-        float normalizedTime = GetNormalizedTime();
+        float normalizedTime = GetNormalizedTime(stateMachine.Animator);
 
         if(normalizedTime>=previousFrameTime && normalizedTime<1f)
         {
@@ -125,25 +125,7 @@ public class PlayerAttackingState : PlayerBaseState
 
     
 
-    private float GetNormalizedTime()
-    {
-        AnimatorStateInfo currentInfo= stateMachine.Animator.GetCurrentAnimatorStateInfo(0);
-        AnimatorStateInfo nextInfo= stateMachine.Animator.GetNextAnimatorStateInfo(0);
-
-        if(stateMachine.Animator.IsInTransition(0) && nextInfo.IsTag("Attack"))
-        {
-            return nextInfo.normalizedTime;
-        }
-
-        else if(!stateMachine.Animator.IsInTransition(0) && currentInfo.IsTag("Attack"))
-        {
-            return currentInfo.normalizedTime;
-        }
-        else
-        {
-            return 0f;
-        }
-    }
+    
 
     private void TryComboAttack(float normalizedTime)
     {
