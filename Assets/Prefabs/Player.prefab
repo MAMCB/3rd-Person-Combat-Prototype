@@ -648,6 +648,7 @@ GameObject:
   - component: {fileID: 3393931361664848761}
   - component: {fileID: 497469811624149376}
   - component: {fileID: 3725080060236548917}
+  - component: {fileID: 5852300197056636219}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -674,6 +675,7 @@ Transform:
   - {fileID: 724599379999075479}
   - {fileID: 2633167094450000418}
   - {fileID: 5961486251918251716}
+  - {fileID: 3113608130344372756}
   m_Father: {fileID: 0}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -711,15 +713,17 @@ MonoBehaviour:
   <Targeter>k__BackingField: {fileID: 4395580958229970520}
   <Health>k__BackingField: {fileID: 497469811624149376}
   <Ragdoll>k__BackingField: {fileID: 3725080060236548917}
+  <groundCheck>k__BackingField: {fileID: 5852300197056636219}
   <FreeLookMovementWalkingSpeed>k__BackingField: 4
   <FreeLookMovementRunningSpeed>k__BackingField: 6
   <TargetingMovementSpeed>k__BackingField: 5
   <RotationSmoothValue>k__BackingField: 10
-  <DodgeDuration>k__BackingField: 0.1
-  <DodgeLenght>k__BackingField: 0.75
-  <DodgeCoolDown>k__BackingField: 1
-  <JumpForce>k__BackingField: 4
-  <minimumFallVelocity>k__BackingField: -2
+  <DodgeDuration>k__BackingField: 0.6
+  <DodgeLenght>k__BackingField: 3
+  <JumpForce>k__BackingField: 4.5
+  <minimumFallVelocity>k__BackingField: -2.5
+  <maximumFallVelocity>k__BackingField: 1
+  FallVelocity: 0
   <swordFallKnockbackForce>k__BackingField: 15
   <swordFallDamage>k__BackingField: 20
   <axeFallKnockbackForce>k__BackingField: 20
@@ -860,6 +864,7 @@ MonoBehaviour:
   isAmbientSoundPlaying: 0
   isBattleSoundPlaying: 0
   LookValue: {x: 0, y: 0}
+  fallingFromJumping: 0
   SwordActive: 0
   AxeActive: 0
   currentWeapon:
@@ -898,7 +903,7 @@ CharacterController:
   m_Height: 1.75
   m_Radius: 0.24
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0.45
   m_SkinWidth: 0.024
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0.875, z: 0}
@@ -1073,6 +1078,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 7877791182974062899}
   controller: {fileID: 4562803679399475185}
+--- !u!114 &5852300197056636219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1415647545633945816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c0e378a2dada074480757fb1e9330fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundCheck: {fileID: 4444674894942583411}
+  groundRange: 1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  isInGroundRange: 0
 --- !u!1 &1856524247092386026
 GameObject:
   m_ObjectHideFlags: 0
@@ -1085,7 +1108,7 @@ GameObject:
   - component: {fileID: 4395580958229970520}
   - component: {fileID: 415423262566054421}
   - component: {fileID: 268476388809644501}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Targeter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2367,6 +2390,37 @@ Transform:
   m_Father: {fileID: 4996865795524235338}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 17.895857, y: 0.5977979, z: 3.57241}
+--- !u!1 &4444674894942583411
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3113608130344372756}
+  m_Layer: 6
+  m_Name: GroundCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3113608130344372756
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4444674894942583411}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.02, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1796570516167484002}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4540190658047803268
 GameObject:
   m_ObjectHideFlags: 0
@@ -3561,7 +3615,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2633167094450000418}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CameraFocus
   m_TagString: Untagged
   m_Icon: {fileID: 0}

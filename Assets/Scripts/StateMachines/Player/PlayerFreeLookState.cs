@@ -59,7 +59,15 @@ public class PlayerFreeLookState : PlayerBaseState
             return;
         }
         Vector3 movement = CalculateMovement();
-        Move(movement * freeLookMovementSpeed, deltatime);
+        if(stateMachine.CharacterController.velocity.y>stateMachine.minimumFallVelocity)
+        {
+            Move(movement * freeLookMovementSpeed, deltatime);
+        }
+        else
+        {
+            stateMachine.SwitchState(new PlayerFallingState(stateMachine));
+        }
+        
 
 
         

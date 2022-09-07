@@ -5,11 +5,13 @@ using UnityEngine;
 public class PlayerFallingState : PlayerBaseState
 {
     private readonly int FallHash = Animator.StringToHash("Fall");
+    private readonly int FallingHash = Animator.StringToHash("Falling");
     private const float CrossfadeDuration = 0.1f;
     private Vector3 momentum;
     private readonly int AxeFallAttack = Animator.StringToHash("AxeFallingAttack");
     private readonly int SwordFallAttack = Animator.StringToHash("SwordFallingAttack");
     private bool playedAttackAnimation = false;
+    //private float fallTimer = 0.5f;
     public PlayerFallingState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
     }
@@ -18,16 +20,31 @@ public class PlayerFallingState : PlayerBaseState
     {
         momentum = stateMachine.CharacterController.velocity;
         momentum.y = 0f;
-        stateMachine.Animator.CrossFadeInFixedTime(FallHash, CrossfadeDuration);
+        if(stateMachine.groundCheck.isInGroundRange)
+        {
+            stateMachine.Animator.CrossFadeInFixedTime(FallHash, CrossfadeDuration);
+        }
+        else
+        {
+            stateMachine.Animator.CrossFadeInFixedTime(FallingHash, CrossfadeDuration);
+        }
+        
+        
     }
 
    
 
     public override void Tick(float deltatime)
     {
+        //if(stateMachine.groundCheck.isInGroundRange)
+        //{
+        //    stateMachine.Animator.CrossFadeInFixedTime(FallHash, CrossfadeDuration);
+        //}
+        
        if(!stateMachine.CharacterController.isGrounded)
         {
             Move(momentum, deltatime);
+            stateMachine.FallVelocity += deltatime;
         }
        else
         {
@@ -55,16 +72,32 @@ public class PlayerFallingState : PlayerBaseState
 
             if (stateMachine.CharacterController.isGrounded && !playedAttackAnimation)
         {
+            
             ReturnToLocomotion();
             
         }
+
+            if(stateMachine.CharacterController.isGrounded)  
+        {
+            if(stateMachine.FallVelocity > stateMachine.maximumFallVelocity)
+            {
+                stateMachine.Health.DealDamage(100);
+            }
+            else
+            {
+                stateMachine.FallVelocity = 0f;
+            }
+            
+        }
+          
+
         FaceTarget();
     }
 
 
     public override void Exit()
     {
-        stateMachine.fallingFromJumping = false;
+        
     }
 
     private void CheckAnimationDuration()

@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class PlayerTargetingState : PlayerBaseState
 {
-    private Vector2 dodgingDirectionInput;
-    private float remainingDodgeTime;
+    
     private readonly int TargetingBlendTreeHash = Animator.StringToHash("Targeting Blend Tree");
 
     private readonly int TargetingForwardHash = Animator.StringToHash("TargetingForward");
@@ -85,11 +84,8 @@ public class PlayerTargetingState : PlayerBaseState
 
     private void OnDodge()
     {
-        if(Time.time-stateMachine.PreviousDodgeTime<stateMachine.DodgeCoolDown) { return; }
-
-        stateMachine.SetDodgeTime(Time.time);
-        dodgingDirectionInput = stateMachine.InputReader.MovementValue;
-        remainingDodgeTime = stateMachine.DodgeDuration;
+        if(stateMachine.InputReader.MovementValue==Vector2.zero) { return; }
+        stateMachine.SwitchState(new PlayerDodgeState(stateMachine,stateMachine.InputReader.MovementValue));
         
     }
 
@@ -101,17 +97,10 @@ public class PlayerTargetingState : PlayerBaseState
     {
         Vector3 movement = new Vector3();
 
-        if(remainingDodgeTime>0f)
-        {
-            movement += stateMachine.transform.right * dodgingDirectionInput.x * stateMachine.DodgeLenght/stateMachine.DodgeDuration;
-            movement += stateMachine.transform.forward * dodgingDirectionInput.y * stateMachine.DodgeLenght / stateMachine.DodgeDuration;
-            remainingDodgeTime = MathF.Max(remainingDodgeTime - deltatime, 0f);
-        }
-        else
-        {
+        
             movement += stateMachine.transform.right * stateMachine.InputReader.MovementValue.x;
             movement += stateMachine.transform.forward * stateMachine.InputReader.MovementValue.y;
-        }
+        
 
        
         return movement;

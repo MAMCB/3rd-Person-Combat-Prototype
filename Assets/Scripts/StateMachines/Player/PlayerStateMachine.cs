@@ -15,7 +15,7 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public Health Health { get; private set; }
     [field: SerializeField] public Ragdoll Ragdoll { get; private set; }
 
-  //  [field: SerializeField] public GameObject shieldWall { get; private set; }
+    [field: SerializeField] public GroundCheck groundCheck { get; private set; }
 
 
     [field: SerializeField] public float FreeLookMovementWalkingSpeed { get; private set; }
@@ -24,11 +24,15 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public float RotationSmoothValue { get; private set; }
     [field: SerializeField] public float DodgeDuration { get; private set; }
     [field: SerializeField] public float DodgeLenght { get; private set; }
-    [field: SerializeField] public float DodgeCoolDown { get; private set; }
+    
 
     [field: SerializeField] public float JumpForce { get; private set; }
 
     [field: SerializeField] public float minimumFallVelocity { get; private set; }
+
+    [field: SerializeField] public float maximumFallVelocity { get; private set; }
+    public float FallVelocity;
+
 
     [field: SerializeField] public float swordFallKnockbackForce { get; private set; }
     [field: SerializeField] public int swordFallDamage { get; private set; }
@@ -102,10 +106,12 @@ public class PlayerStateMachine : StateMachine
             WeaponActive = false;
         }
 
-        if(CharacterController.velocity.y<minimumFallVelocity &&!fallingFromJumping )
-        {
-            SwitchState(new PlayerFallingState(this));
-        }
+        
+
+        //if(CharacterController.velocity.y<minimumFallVelocity&&!fallingFromJumping )
+        //{
+        //    SwitchState(new PlayerFallingState(this));
+        //}
     }
 
     private void HandleTakeDamage()
@@ -118,10 +124,7 @@ public class PlayerStateMachine : StateMachine
         SwitchState(new PlayerDeadState(this));
     }
 
-    public void SetDodgeTime(float time)
-    {
-        PreviousDodgeTime = time;
-    }
+    
 
     private void OnDisable()
     {
