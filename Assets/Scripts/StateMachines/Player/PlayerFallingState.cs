@@ -25,7 +25,7 @@ public class PlayerFallingState : PlayerBaseState
 
     public override void Tick(float deltatime)
     {
-       if(!playedAttackAnimation)
+       if(!stateMachine.CharacterController.isGrounded)
         {
             Move(momentum, deltatime);
         }
@@ -64,7 +64,7 @@ public class PlayerFallingState : PlayerBaseState
 
     public override void Exit()
     {
-
+        stateMachine.fallingFromJumping = false;
     }
 
     private void CheckAnimationDuration()

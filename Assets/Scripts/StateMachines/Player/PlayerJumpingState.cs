@@ -24,6 +24,7 @@ public class PlayerJumpingState : PlayerBaseState
         Move(momentum, deltatime);
         if(stateMachine.CharacterController.velocity.y<=0)
         {
+            stateMachine.fallingFromJumping = true;
             stateMachine.SwitchState(new PlayerFallingState(stateMachine));
             return;
         }

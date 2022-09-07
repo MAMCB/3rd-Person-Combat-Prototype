@@ -28,6 +28,8 @@ public class PlayerStateMachine : StateMachine
 
     [field: SerializeField] public float JumpForce { get; private set; }
 
+    [field: SerializeField] public float minimumFallVelocity { get; private set; }
+
     [field: SerializeField] public float swordFallKnockbackForce { get; private set; }
     [field: SerializeField] public int swordFallDamage { get; private set; }
 
@@ -64,6 +66,7 @@ public class PlayerStateMachine : StateMachine
     public bool isAmbientSoundPlaying = false;
     public bool isBattleSoundPlaying = false;
     public Vector2 LookValue;
+    public bool fallingFromJumping = false;
 
     public bool SwordActive = false;
     public bool AxeActive = false;
@@ -99,7 +102,10 @@ public class PlayerStateMachine : StateMachine
             WeaponActive = false;
         }
 
-         
+        if(CharacterController.velocity.y<minimumFallVelocity &&!fallingFromJumping )
+        {
+            SwitchState(new PlayerFallingState(this));
+        }
     }
 
     private void HandleTakeDamage()

@@ -719,6 +719,7 @@ MonoBehaviour:
   <DodgeLenght>k__BackingField: 0.75
   <DodgeCoolDown>k__BackingField: 1
   <JumpForce>k__BackingField: 4
+  <minimumFallVelocity>k__BackingField: -2
   <swordFallKnockbackForce>k__BackingField: 15
   <swordFallDamage>k__BackingField: 20
   <axeFallKnockbackForce>k__BackingField: 20
