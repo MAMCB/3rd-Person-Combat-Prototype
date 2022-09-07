@@ -11,7 +11,8 @@ public class Health : MonoBehaviour
     public event Action OnTakeDamage;
     public event Action OnDie;
     private bool isInvulnerable;
-    
+    public bool Isdead => health==0;
+
     void Start()
     {
         health = MaxHealth;

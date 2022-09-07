@@ -14,6 +14,8 @@ public class PlayerDeadState : PlayerBaseState
         stateMachine.WeaponDamageSword.gameObject.SetActive(false);
         stateMachine.WeaponDamageAxe.gameObject.SetActive(false);
         stateMachine.Ragdoll.ToggleRagdoll(true);
+        stateMachine.audioSource.clip = stateMachine.deathSound;
+        stateMachine.audioSource.Play();
     }
 
     public override void Tick(float deltatime)

@@ -711,11 +711,18 @@ MonoBehaviour:
   <Targeter>k__BackingField: {fileID: 4395580958229970520}
   <Health>k__BackingField: {fileID: 497469811624149376}
   <Ragdoll>k__BackingField: {fileID: 3725080060236548917}
-  <shieldWall>k__BackingField: {fileID: 0}
   <FreeLookMovementWalkingSpeed>k__BackingField: 4
   <FreeLookMovementRunningSpeed>k__BackingField: 6
   <TargetingMovementSpeed>k__BackingField: 5
   <RotationSmoothValue>k__BackingField: 10
+  <DodgeDuration>k__BackingField: 0.1
+  <DodgeLenght>k__BackingField: 0.75
+  <DodgeCoolDown>k__BackingField: 1
+  <JumpForce>k__BackingField: 4
+  <swordFallKnockbackForce>k__BackingField: 15
+  <swordFallDamage>k__BackingField: 20
+  <axeFallKnockbackForce>k__BackingField: 20
+  <axeFallDamage>k__BackingField: 30
   <SwordAttacks>k__BackingField:
   - <AnimationName>k__BackingField: Attack1
     <TransitionDuration>k__BackingField: 0.1
@@ -848,6 +855,7 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   battleSound: {fileID: 8300000, guid: de251335e1d7645369bab5cd9afb5834, type: 3}
   ambientSound: {fileID: 8300000, guid: 4a5dfaf7c9c3a48e7a9d0336fb3372fd, type: 3}
+  deathSound: {fileID: 8300000, guid: e4dcda93f104349f6bed053e57a6889d, type: 3}
   isAmbientSoundPlaying: 0
   isBattleSoundPlaying: 0
   LookValue: {x: 0, y: 0}

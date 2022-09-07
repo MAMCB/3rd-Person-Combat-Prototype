@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PlayerTargetingState : PlayerBaseState
 {
+    private Vector2 dodgingDirectionInput;
+    private float remainingDodgeTime;
     private readonly int TargetingBlendTreeHash = Animator.StringToHash("Targeting Blend Tree");
 
     private readonly int TargetingForwardHash = Animator.StringToHash("TargetingForward");
@@ -20,7 +22,9 @@ public class PlayerTargetingState : PlayerBaseState
     {
         stateMachine.Animator.CrossFadeInFixedTime(TargetingBlendTreeHash, CrossfadeDuration);
         stateMachine.InputReader.CancelEvent += OnCancel;
-        if(!stateMachine.isBattleSoundPlaying)
+        stateMachine.InputReader.DodgeEvent += OnDodge;
+        stateMachine.InputReader.JumpEvent += OnJump;
+        if (!stateMachine.isBattleSoundPlaying)
         {
             stateMachine.audioSource.clip = stateMachine.battleSound;
             stateMachine.audioSource.Play();
@@ -48,7 +52,7 @@ public class PlayerTargetingState : PlayerBaseState
             stateMachine.SwitchState(new PlayerFreeLookState(stateMachine));
             return;
         }
-        Vector3 movement = CalculateMovement();
+        Vector3 movement = CalculateMovement(deltatime);
         Move(movement * stateMachine.TargetingMovementSpeed, deltatime);
         UpdateAnimator(deltatime);
         FaceTarget();
@@ -66,8 +70,10 @@ public class PlayerTargetingState : PlayerBaseState
     public override void Exit()
     {
         stateMachine.InputReader.CancelEvent -= OnCancel;
-        
-        
+        stateMachine.InputReader.DodgeEvent -= OnDodge;
+        stateMachine.InputReader.JumpEvent -= OnJump;
+
+
     }
 
     private void OnCancel()
@@ -77,12 +83,37 @@ public class PlayerTargetingState : PlayerBaseState
         stateMachine.SwitchState(new PlayerFreeLookState(stateMachine));
     }
 
-    private Vector3 CalculateMovement()
+    private void OnDodge()
+    {
+        if(Time.time-stateMachine.PreviousDodgeTime<stateMachine.DodgeCoolDown) { return; }
+
+        stateMachine.SetDodgeTime(Time.time);
+        dodgingDirectionInput = stateMachine.InputReader.MovementValue;
+        remainingDodgeTime = stateMachine.DodgeDuration;
+        
+    }
+
+    private void OnJump()
+    {
+        stateMachine.SwitchState(new PlayerJumpingState(stateMachine));
+    }
+    private Vector3 CalculateMovement(float deltatime)
     {
         Vector3 movement = new Vector3();
 
-        movement += stateMachine.transform.right * stateMachine.InputReader.MovementValue.x;
-        movement += stateMachine.transform.forward * stateMachine.InputReader.MovementValue.y;
+        if(remainingDodgeTime>0f)
+        {
+            movement += stateMachine.transform.right * dodgingDirectionInput.x * stateMachine.DodgeLenght/stateMachine.DodgeDuration;
+            movement += stateMachine.transform.forward * dodgingDirectionInput.y * stateMachine.DodgeLenght / stateMachine.DodgeDuration;
+            remainingDodgeTime = MathF.Max(remainingDodgeTime - deltatime, 0f);
+        }
+        else
+        {
+            movement += stateMachine.transform.right * stateMachine.InputReader.MovementValue.x;
+            movement += stateMachine.transform.forward * stateMachine.InputReader.MovementValue.y;
+        }
+
+       
         return movement;
     }
 

@@ -26,7 +26,7 @@ public class EnemyStateMachine : StateMachine
     [field: SerializeField] public float AttackKnockback { get; private set; }
     [field: SerializeField] public float MovementSpeed { get; private set; }
 
-    public GameObject Player { get; private set; }
+    public Health Player { get; private set; }
     public bool AttackMissed;
 
     private void OnEnable()
@@ -37,7 +37,7 @@ public class EnemyStateMachine : StateMachine
 
     void Start()
     {
-        Player=GameObject.FindGameObjectWithTag("Player");
+        Player=GameObject.FindGameObjectWithTag("Player").GetComponent<Health>();
         NavMeshAgent.updatePosition = false; // so the navmesh agent doesn't move the character
         NavMeshAgent.updateRotation = false;
         SwitchState(new EnemyIdleState(this));

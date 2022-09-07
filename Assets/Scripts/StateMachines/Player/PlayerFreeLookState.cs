@@ -37,6 +37,7 @@ public class PlayerFreeLookState : PlayerBaseState
         }
             
         stateMachine.InputReader.TargetEvent += OnTarget;
+        stateMachine.InputReader.JumpEvent += OnJump;
         
         
         freeLookMovementSpeed = stateMachine.FreeLookMovementWalkingSpeed;
@@ -176,8 +177,9 @@ public class PlayerFreeLookState : PlayerBaseState
     public override void Exit()
     {
         stateMachine.InputReader.TargetEvent -= OnTarget;
-        
-        
+        stateMachine.InputReader.JumpEvent -= OnJump;
+
+
 
     }
 
@@ -189,6 +191,11 @@ public class PlayerFreeLookState : PlayerBaseState
             stateMachine.SwitchState(new PlayerTargetingState(stateMachine));
         
         
+    }
+
+    private void OnJump()
+    {
+        stateMachine.SwitchState(new PlayerJumpingState(stateMachine));
     }
 
     

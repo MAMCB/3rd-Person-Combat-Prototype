@@ -51,12 +51,7 @@ public class WeaponDamage : MonoBehaviour
             Vector3 direction = (other.transform.position - myCollider.transform.position).normalized;
             forceReceiver.AddForce(direction * knockback);
         }
-        if(other.TryGetComponent<PlayerStateMachine>(out PlayerStateMachine playerStateMachine))
-        {
-            Target newTarget = myCollider.gameObject.GetComponent<Target>();
-            playerStateMachine.ChangeTarget(newTarget);
 
-        }
         
     }
 

@@ -22,6 +22,18 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public float FreeLookMovementRunningSpeed { get; private set; }
     [field: SerializeField] public float TargetingMovementSpeed { get; private set; }
     [field: SerializeField] public float RotationSmoothValue { get; private set; }
+    [field: SerializeField] public float DodgeDuration { get; private set; }
+    [field: SerializeField] public float DodgeLenght { get; private set; }
+    [field: SerializeField] public float DodgeCoolDown { get; private set; }
+
+    [field: SerializeField] public float JumpForce { get; private set; }
+
+    [field: SerializeField] public float swordFallKnockbackForce { get; private set; }
+    [field: SerializeField] public int swordFallDamage { get; private set; }
+
+    [field: SerializeField] public float axeFallKnockbackForce { get; private set; }
+    [field: SerializeField] public int axeFallDamage { get; private set; }
+
 
     [field: SerializeField] public Attack[] SwordAttacks { get; private set; }
     [field: SerializeField] public Attack HighSwordAttack { get; private set; }
@@ -44,10 +56,11 @@ public class PlayerStateMachine : StateMachine
 
 
     [field: SerializeField] public bool WeaponActive { get; private set; }
-
+    public float PreviousDodgeTime { get; private set; } = Mathf.NegativeInfinity;
     public AudioSource audioSource;
     public AudioClip battleSound;
    public AudioClip ambientSound;
+    public AudioClip deathSound;
     public bool isAmbientSoundPlaying = false;
     public bool isBattleSoundPlaying = false;
     public Vector2 LookValue;
@@ -85,6 +98,8 @@ public class PlayerStateMachine : StateMachine
         {
             WeaponActive = false;
         }
+
+         
     }
 
     private void HandleTakeDamage()
@@ -97,16 +112,18 @@ public class PlayerStateMachine : StateMachine
         SwitchState(new PlayerDeadState(this));
     }
 
+    public void SetDodgeTime(float time)
+    {
+        PreviousDodgeTime = time;
+    }
+
     private void OnDisable()
     {
         Health.OnTakeDamage -= HandleTakeDamage;
         Health.OnDie -= HandleDeath;
     }
 
-    public void ChangeTarget(Target newTarget)
-    {
-        Targeter.currentTarget = newTarget;
-    }
+    
 
 
 
