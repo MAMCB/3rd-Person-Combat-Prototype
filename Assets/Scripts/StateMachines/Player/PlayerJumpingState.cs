@@ -16,6 +16,7 @@ public class PlayerJumpingState : PlayerBaseState
         stateMachine.ForceReceiver.Jump(stateMachine.JumpForce);
         momentum = stateMachine.CharacterController.velocity;
         momentum.y = 0f;
+        stateMachine.LedgeDetector.OnLedgeDetect += HandLedgeDetect;
         stateMachine.Animator.CrossFadeInFixedTime(JumpHash, CrossfadeDuration);
     }
 
@@ -33,8 +34,16 @@ public class PlayerJumpingState : PlayerBaseState
 
     public override void Exit()
     {
-        
+        stateMachine.LedgeDetector.OnLedgeDetect -= HandLedgeDetect;
     }
 
-    
+    private void HandLedgeDetect(Vector3 closestPoint, Vector3 ledgeForward, bool freeHanging)
+    {
+        if (!stateMachine.WeaponActive && !stateMachine.wasHanging)
+        {
+            stateMachine.SwitchState(new PlayerHangingState(stateMachine, closestPoint, ledgeForward, freeHanging));
+        }
+    }
+
+
 }

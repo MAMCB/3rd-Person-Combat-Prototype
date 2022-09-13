@@ -42,7 +42,8 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public float axeFallKnockbackForce { get; private set; }
     [field: SerializeField] public int axeFallDamage { get; private set; }
 
-
+    [field: SerializeField] public float freeHangGrabPointOffset { get; private set; }
+    [field: SerializeField] public float wallGrabPointOffset { get; private set; }
     [field: SerializeField] public Attack[] SwordAttacks { get; private set; }
     [field: SerializeField] public Attack HighSwordAttack { get; private set; }
     [field: SerializeField] public Attack LowSwordAttack { get; private set; }
@@ -73,6 +74,8 @@ public class PlayerStateMachine : StateMachine
     public bool isBattleSoundPlaying = false;
     public Vector2 LookValue;
     public bool fallingFromJumping = false;
+    public bool wasHanging = false;
+    
 
     public bool SwordActive = false;
     public bool AxeActive = false;

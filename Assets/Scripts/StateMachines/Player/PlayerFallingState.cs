@@ -20,6 +20,7 @@ public class PlayerFallingState : PlayerBaseState
     {
         momentum = stateMachine.CharacterController.velocity;
         momentum.y = 0f;
+        stateMachine.LedgeDetector.OnLedgeDetect += HandLedgeDetect;
         if(stateMachine.groundCheck.isInGroundRange)
         {
             stateMachine.Animator.CrossFadeInFixedTime(FallHash, CrossfadeDuration);
@@ -97,7 +98,8 @@ public class PlayerFallingState : PlayerBaseState
 
     public override void Exit()
     {
-        
+        stateMachine.wasHanging = false;
+        stateMachine.LedgeDetector.OnLedgeDetect -= HandLedgeDetect;
     }
 
     private void CheckAnimationDuration()
@@ -106,5 +108,14 @@ public class PlayerFallingState : PlayerBaseState
         {
             playedAttackAnimation = false;
         }
+    }
+
+    private void HandLedgeDetect(Vector3 closestPoint,Vector3 ledgeForward,bool freeHanging)
+    {
+        if(!stateMachine.WeaponActive && !stateMachine.wasHanging)
+        {
+            stateMachine.SwitchState(new PlayerHangingState(stateMachine, closestPoint, ledgeForward, freeHanging));
+        }
+       
     }
 }
