@@ -22,7 +22,7 @@ public class PlayerTargetingState : PlayerBaseState
         stateMachine.Animator.CrossFadeInFixedTime(TargetingBlendTreeHash, CrossfadeDuration);
         stateMachine.InputReader.CancelEvent += OnCancel;
         stateMachine.InputReader.DodgeEvent += OnDodge;
-        stateMachine.InputReader.JumpEvent += OnJump;
+       // stateMachine.InputReader.JumpEvent += OnJump;
         if (!stateMachine.isBattleSoundPlaying)
         {
             stateMachine.audioSource.clip = stateMachine.battleSound;
@@ -70,7 +70,7 @@ public class PlayerTargetingState : PlayerBaseState
     {
         stateMachine.InputReader.CancelEvent -= OnCancel;
         stateMachine.InputReader.DodgeEvent -= OnDodge;
-        stateMachine.InputReader.JumpEvent -= OnJump;
+       // stateMachine.InputReader.JumpEvent -= OnJump;
 
 
     }
@@ -89,10 +89,10 @@ public class PlayerTargetingState : PlayerBaseState
         
     }
 
-    private void OnJump()
-    {
-        stateMachine.SwitchState(new PlayerJumpingState(stateMachine));
-    }
+    //private void OnJump()
+    //{
+    //    stateMachine.SwitchState(new PlayerJumpingState(stateMachine));
+    //}
     private Vector3 CalculateMovement(float deltatime)
     {
         Vector3 movement = new Vector3();
