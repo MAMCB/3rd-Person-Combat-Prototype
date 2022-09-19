@@ -23,6 +23,8 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public float FreeLookMovementWalkingSpeed { get; private set; }
     [field: SerializeField] public float FreeLookMovementRunningSpeed { get; private set; }
     [field: SerializeField] public float TargetingMovementSpeed { get; private set; }
+
+    [field: SerializeField] public float HangingMovementSpeed { get; private set; }
     [field: SerializeField] public float RotationSmoothValue { get; private set; }
     [field: SerializeField] public float DodgeDuration { get; private set; }
     [field: SerializeField] public float DodgeLenght { get; private set; }
@@ -76,6 +78,7 @@ public class PlayerStateMachine : StateMachine
     public bool fallingFromJumping = false;
     public bool wasHanging = false;
     
+    
 
     public bool SwordActive = false;
     public bool AxeActive = false;
@@ -92,7 +95,8 @@ public class PlayerStateMachine : StateMachine
     // Start is called before the first frame update
     void Start()
     {
-        
+       Cursor.lockState= CursorLockMode.Locked;
+        Cursor.visible = false;
         MainCameraTransform = Camera.main.transform;
         SwitchState(new PlayerFreeLookState(this));
         
@@ -137,7 +141,7 @@ public class PlayerStateMachine : StateMachine
         Health.OnDie -= HandleDeath;
     }
 
-    
+   
 
 
 

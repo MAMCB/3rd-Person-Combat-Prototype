@@ -20,9 +20,9 @@ public class PlayerTargetingState : PlayerBaseState
     public override void Enter()
     {
         stateMachine.Animator.CrossFadeInFixedTime(TargetingBlendTreeHash, CrossfadeDuration);
-        stateMachine.InputReader.CancelEvent += OnCancel;
-        stateMachine.InputReader.DodgeEvent += OnDodge;
-       // stateMachine.InputReader.JumpEvent += OnJump;
+        stateMachine.InputReader.TargetEvent += OnTarget;
+        //stateMachine.InputReader.DodgeEvent += OnDodge;
+        stateMachine.InputReader.JumpEvent += OnJump;
         if (!stateMachine.isBattleSoundPlaying)
         {
             stateMachine.audioSource.clip = stateMachine.battleSound;
@@ -68,31 +68,33 @@ public class PlayerTargetingState : PlayerBaseState
 
     public override void Exit()
     {
-        stateMachine.InputReader.CancelEvent -= OnCancel;
-        stateMachine.InputReader.DodgeEvent -= OnDodge;
-       // stateMachine.InputReader.JumpEvent -= OnJump;
+        stateMachine.InputReader.TargetEvent -= OnTarget;
+        //stateMachine.InputReader.DodgeEvent -= OnDodge;
+        stateMachine.InputReader.JumpEvent -= OnJump;
 
 
     }
 
-    private void OnCancel()
+    private void OnTarget()
     {
         stateMachine.Targeter.Cancel();
 
         stateMachine.SwitchState(new PlayerFreeLookState(stateMachine));
     }
 
-    private void OnDodge()
-    {
-        if(stateMachine.InputReader.MovementValue==Vector2.zero) { return; }
-        stateMachine.SwitchState(new PlayerDodgeState(stateMachine,stateMachine.InputReader.MovementValue));
-        
-    }
-
-    //private void OnJump()
+    //private void OnDodge()
     //{
-    //    stateMachine.SwitchState(new PlayerJumpingState(stateMachine));
+    //    if(stateMachine.InputReader.MovementValue==Vector2.zero) { return; }
+    //    stateMachine.SwitchState(new PlayerDodgeState(stateMachine,stateMachine.InputReader.MovementValue));
+        
     //}
+
+    private void OnJump()
+    {
+        // stateMachine.SwitchState(new PlayerJumpingState(stateMachine));
+        if (stateMachine.InputReader.MovementValue == Vector2.zero) { return; }
+        stateMachine.SwitchState(new PlayerDodgeState(stateMachine, stateMachine.InputReader.MovementValue));
+    }
     private Vector3 CalculateMovement(float deltatime)
     {
         Vector3 movement = new Vector3();

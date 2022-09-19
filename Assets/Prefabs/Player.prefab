@@ -719,6 +719,7 @@ MonoBehaviour:
   <FreeLookMovementWalkingSpeed>k__BackingField: 4
   <FreeLookMovementRunningSpeed>k__BackingField: 6
   <TargetingMovementSpeed>k__BackingField: 5
+  <HangingMovementSpeed>k__BackingField: 2
   <RotationSmoothValue>k__BackingField: 10
   <DodgeDuration>k__BackingField: 0.6
   <DodgeLenght>k__BackingField: 3
@@ -869,6 +870,7 @@ MonoBehaviour:
   isBattleSoundPlaying: 0
   LookValue: {x: 0, y: 0}
   fallingFromJumping: 0
+  wasHanging: 0
   SwordActive: 0
   AxeActive: 0
   currentWeapon:
@@ -1954,6 +1956,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3c6b1fbcd016d647a4059f03d544747, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnLimiter: 0
+  limiterSide: 0
 --- !u!1 &3589735726937169935
 GameObject:
   m_ObjectHideFlags: 0

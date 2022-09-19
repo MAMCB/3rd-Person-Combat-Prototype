@@ -104,7 +104,7 @@ public class PlayerFallingState : PlayerBaseState
 
     private void CheckAnimationDuration()
     {
-       if( GetNormalizedTime(stateMachine.Animator) >= 1)
+       if( GetNormalizedTime(stateMachine.Animator,"Attack") >= 1)
         {
             playedAttackAnimation = false;
         }

@@ -22,6 +22,11 @@ public abstract class PlayerBaseState : State
         Move(Vector3.zero, deltatime);
     }
 
+    protected void HangMove(Vector3 motion,float deltatime)
+    {
+        stateMachine.CharacterController.Move(motion * deltatime);
+    }
+
     protected void FaceTarget()
     {
         if (stateMachine.Targeter.currentTarget == null) { return; }

@@ -16,7 +16,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
     public event Action DodgeEvent;
     public event Action TargetEvent;
-    public event Action CancelEvent;
+    
     public  bool IsAttacking { get; private set; }
     public bool IsSprinting { get; private set; }
     private Controls controls;
@@ -60,11 +60,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
         TargetEvent?.Invoke();
     }
 
-    public void OnCancel(InputAction.CallbackContext context)
-    {
-        if (!context.performed) { return; }
-        CancelEvent?.Invoke();
-    }
+   
 
     public void OnSprint(InputAction.CallbackContext context)
     {

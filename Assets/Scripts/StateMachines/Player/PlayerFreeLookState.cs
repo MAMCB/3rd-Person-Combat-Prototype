@@ -11,21 +11,30 @@ public class PlayerFreeLookState : PlayerBaseState
     private const float CrossfadeDuration = 0.2f;
     private float freeLookMovementSpeed;
     private float animatorFloatValue;
-    
-    
-    
-    
-    
-    
-    public PlayerFreeLookState(PlayerStateMachine stateMachine) : base(stateMachine)
+    private bool shouldFade;
+
+
+
+
+
+    public PlayerFreeLookState(PlayerStateMachine stateMachine, bool shouldFade = true) : base(stateMachine)
     {
+        this.shouldFade = shouldFade;
     }
 
 
     public override void Enter()
     {
-        //Debug.Log("Entered Free Look State");
-        stateMachine.Animator.CrossFadeInFixedTime(FreeLookBlendTreeHash, CrossfadeDuration);
+        stateMachine.Animator.SetFloat(FreeLookSpeedHash, 0f);
+        if(shouldFade)
+        {
+            stateMachine.Animator.CrossFadeInFixedTime(FreeLookBlendTreeHash, CrossfadeDuration);
+        }
+        else
+        {
+            stateMachine.Animator.Play(FreeLookBlendTreeHash);
+        }
+        
         stateMachine.isBattleSoundPlaying = false;
 
         if (!stateMachine.isAmbientSoundPlaying)
