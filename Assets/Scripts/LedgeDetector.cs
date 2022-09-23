@@ -5,14 +5,16 @@ using UnityEngine;
 
 public class LedgeDetector : MonoBehaviour
 {
-    public event Action<Vector3, Vector3,bool> OnLedgeDetect;
+    public event Action<Vector3, Vector3,bool,bool> OnLedgeDetect;
     public bool OnLimiter;
     public int limiterSide;
+    public bool onLedge;
     
     
     private void OnTriggerEnter(Collider other)
     {
-        OnLedgeDetect?.Invoke(other.ClosestPointOnBounds(transform.position), other.transform.forward, other.GetComponent<Ledge>().freeHanging);
+        onLedge = true;
+        OnLedgeDetect?.Invoke(other.ClosestPointOnBounds(transform.position), other.transform.forward, other.GetComponent<Ledge>().freeHanging,other.GetComponent<Ledge>().roomToClimbUp);
         if(other.GetComponent<Limiter>())
 
         {
@@ -23,6 +25,7 @@ public class LedgeDetector : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        onLedge = false;
         if (other.GetComponent<Limiter>())
 
         {

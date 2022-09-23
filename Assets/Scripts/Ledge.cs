@@ -5,4 +5,5 @@ using UnityEngine;
 public class Ledge : MonoBehaviour
 {
     public bool freeHanging = false;
+    public bool roomToClimbUp = true;
 }

@@ -731,8 +731,8 @@ MonoBehaviour:
   <swordFallDamage>k__BackingField: 20
   <axeFallKnockbackForce>k__BackingField: 20
   <axeFallDamage>k__BackingField: 30
-  <freeHangGrabPointOffset>k__BackingField: 2.3
-  <wallGrabPointOffset>k__BackingField: 1.9
+  <freeHangGrabPointOffset>k__BackingField: -0.5
+  <wallGrabPointOffset>k__BackingField: 0.5
   <SwordAttacks>k__BackingField:
   - <AnimationName>k__BackingField: Attack1
     <TransitionDuration>k__BackingField: 0.1

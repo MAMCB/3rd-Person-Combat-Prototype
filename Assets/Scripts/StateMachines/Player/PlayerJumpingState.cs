@@ -5,19 +5,32 @@ using UnityEngine;
 public class PlayerJumpingState : PlayerBaseState
 {
     private readonly int JumpHash = Animator.StringToHash("Jump");
+    private readonly int wallJumpHash = Animator.StringToHash("Braced Hang Hop Up");
     private const float CrossfadeDuration = 0.1f;
     private Vector3 momentum;
-    public PlayerJumpingState(PlayerStateMachine stateMachine) : base(stateMachine)
+    private bool fromHanging = false;
+    public PlayerJumpingState(PlayerStateMachine stateMachine,bool fromHanging) : base(stateMachine)
     {
+        this.fromHanging = fromHanging;
     }
 
     public override void Enter()
     {
-        stateMachine.ForceReceiver.Jump(stateMachine.JumpForce);
-        momentum = stateMachine.CharacterController.velocity;
-        momentum.y = 0f;
+        
         stateMachine.LedgeDetector.OnLedgeDetect += HandLedgeDetect;
-        stateMachine.Animator.CrossFadeInFixedTime(JumpHash, CrossfadeDuration);
+        if(!fromHanging)
+        {
+            stateMachine.ForceReceiver.Jump(stateMachine.JumpForce);
+            momentum = stateMachine.CharacterController.velocity;
+            momentum.y = 0f;
+            stateMachine.Animator.CrossFadeInFixedTime(JumpHash, CrossfadeDuration);
+        }
+        else
+        {
+            stateMachine.ForceReceiver.Jump(stateMachine.JumpForce*1.5f);
+            stateMachine.Animator.CrossFadeInFixedTime(wallJumpHash, CrossfadeDuration);
+        }
+        
     }
 
     public override void Tick(float deltatime)
@@ -37,11 +50,11 @@ public class PlayerJumpingState : PlayerBaseState
         stateMachine.LedgeDetector.OnLedgeDetect -= HandLedgeDetect;
     }
 
-    private void HandLedgeDetect(Vector3 closestPoint, Vector3 ledgeForward, bool freeHanging)
+    private void HandLedgeDetect(Vector3 closestPoint, Vector3 ledgeForward, bool freeHanging, bool roomToClimbUp)
     {
         if (!stateMachine.WeaponActive && !stateMachine.wasHanging)
         {
-            stateMachine.SwitchState(new PlayerHangingState(stateMachine, closestPoint, ledgeForward, freeHanging));
+            stateMachine.SwitchState(new PlayerHangingState(stateMachine, closestPoint, ledgeForward, freeHanging, roomToClimbUp));
         }
     }
 

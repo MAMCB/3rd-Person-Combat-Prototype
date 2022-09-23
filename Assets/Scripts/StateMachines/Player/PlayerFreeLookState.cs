@@ -213,7 +213,7 @@ public class PlayerFreeLookState : PlayerBaseState
 
     private void OnJump()
     {
-        stateMachine.SwitchState(new PlayerJumpingState(stateMachine));
+        stateMachine.SwitchState(new PlayerJumpingState(stateMachine,false));
     }
 
     

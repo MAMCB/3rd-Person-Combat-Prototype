@@ -5,26 +5,28 @@ using UnityEngine;
 public class PlayerHangingState : PlayerBaseState
 {
     private bool freeHanging;
+    private bool roomToClimbUp;
     private Vector3 closestPoint;
     private Vector3 ledgeForward;
    
     private readonly int freeHangingBlendTreeHash = Animator.StringToHash("FreeHang Climbing BlendTree");
     private readonly int shimmyRightHash = Animator.StringToHash("ShimmyRight");
-    private readonly int wallHangingHash = Animator.StringToHash("Hanging Idle-Wall");
+    private readonly int bracedHangingBlendTreeHash = Animator.StringToHash("BracedHang Climbing BlendTree ");
     private const float CrossfadeDuration = 0.1f;
 
-    public PlayerHangingState(PlayerStateMachine stateMachine,Vector3 closestPoint, Vector3 ledgeForward, bool freeHanging) : base(stateMachine)
+    public PlayerHangingState(PlayerStateMachine stateMachine,Vector3 closestPoint, Vector3 ledgeForward, bool freeHanging, bool roomToClimbUp) : base(stateMachine)
     {
         this.freeHanging = freeHanging;
         this.closestPoint = closestPoint;
-        //if(freeHanging)
-        //{
-        //    this.closestPoint.y = closestPoint.y - stateMachine.freeHangGrabPointOffset;
-        //}
-        //else
-        //{
-        //    this.closestPoint.y = closestPoint.y - stateMachine.wallGrabPointOffset;
-        //}
+        this.roomToClimbUp = roomToClimbUp;
+        if(freeHanging)
+        {
+            this.closestPoint.y = closestPoint.y + stateMachine.freeHangGrabPointOffset;
+        }
+        else
+        {
+            this.closestPoint.y = closestPoint.y + stateMachine.wallGrabPointOffset;
+       }
         
         this.ledgeForward = ledgeForward;
     }
@@ -40,10 +42,12 @@ public class PlayerHangingState : PlayerBaseState
         if(freeHanging)
         {
             stateMachine.Animator.CrossFadeInFixedTime(freeHangingBlendTreeHash, CrossfadeDuration);
+            
         }
         else
         {
-            stateMachine.Animator.CrossFadeInFixedTime(wallHangingHash, CrossfadeDuration);
+            stateMachine.Animator.CrossFadeInFixedTime(bracedHangingBlendTreeHash, CrossfadeDuration);
+            stateMachine.InputReader.JumpEvent += OnJump;
         }
     }
 
@@ -57,7 +61,8 @@ public class PlayerHangingState : PlayerBaseState
         }
         if(stateMachine.InputReader.MovementValue.y>0)
         {
-            stateMachine.SwitchState(new PlayerPullUpState(stateMachine));
+            if(!roomToClimbUp) { return; }
+            stateMachine.SwitchState(new PlayerPullUpState(stateMachine,freeHanging));
         }
         Vector3 movement = CalculateMovement(deltatime);
         if (stateMachine.LedgeDetector.OnLimiter && stateMachine.LedgeDetector.limiterSide == 1 && movement.x > 0)
@@ -73,10 +78,15 @@ public class PlayerHangingState : PlayerBaseState
 
         HangMove(movement * stateMachine.HangingMovementSpeed, deltatime);
         UpdateAnimator(deltatime);
+       
     }
 
     public override void Exit()
     {
+        if(!freeHanging)
+        {
+            stateMachine.InputReader.JumpEvent -= OnJump;
+        }
         
     }
 
@@ -103,5 +113,10 @@ public class PlayerHangingState : PlayerBaseState
        // stateMachine.Animator.SetFloat(TargetingRightHash, movingValueY, 0.1f, deltatime);
 
 
+    }
+
+    private void OnJump()
+    {
+        stateMachine.SwitchState(new PlayerJumpingState(stateMachine,true));
     }
 }

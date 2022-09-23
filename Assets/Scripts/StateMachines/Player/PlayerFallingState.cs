@@ -110,11 +110,11 @@ public class PlayerFallingState : PlayerBaseState
         }
     }
 
-    private void HandLedgeDetect(Vector3 closestPoint,Vector3 ledgeForward,bool freeHanging)
+    private void HandLedgeDetect(Vector3 closestPoint,Vector3 ledgeForward,bool freeHanging,bool roomToClimbUp)
     {
         if(!stateMachine.WeaponActive && !stateMachine.wasHanging)
         {
-            stateMachine.SwitchState(new PlayerHangingState(stateMachine, closestPoint, ledgeForward, freeHanging));
+            stateMachine.SwitchState(new PlayerHangingState(stateMachine, closestPoint, ledgeForward, freeHanging,roomToClimbUp));
         }
        
     }

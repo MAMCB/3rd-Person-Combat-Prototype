@@ -35,6 +35,7 @@ public class ForceReceiver : MonoBehaviour
                 agent.enabled = true;
             }
         }
+        
     }
 
     public void AddForce(Vector3 force)
