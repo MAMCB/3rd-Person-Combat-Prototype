@@ -18,6 +18,7 @@ public class PlayerFallingState : PlayerBaseState
 
     public override void Enter()
     {
+        
         momentum = stateMachine.CharacterController.velocity;
         momentum.y = 0f;
         stateMachine.LedgeDetector.OnLedgeDetect += HandLedgeDetect;
@@ -41,8 +42,13 @@ public class PlayerFallingState : PlayerBaseState
         //{
         //    stateMachine.Animator.CrossFadeInFixedTime(FallHash, CrossfadeDuration);
         //}
-        
-       if(!stateMachine.CharacterController.isGrounded)
+
+        if (GetNormalizedTime(stateMachine.Animator, "Falling") > 1f)
+        {
+            stateMachine.wasHanging = false;
+        }
+
+            if (!stateMachine.CharacterController.isGrounded)
         {
             Move(momentum, deltatime);
             stateMachine.FallVelocity += deltatime;
@@ -112,6 +118,7 @@ public class PlayerFallingState : PlayerBaseState
 
     private void HandLedgeDetect(Vector3 closestPoint,Vector3 ledgeForward,bool freeHanging,bool roomToClimbUp)
     {
+        Debug.Log("detected ledge");
         if(!stateMachine.WeaponActive && !stateMachine.wasHanging)
         {
             stateMachine.SwitchState(new PlayerHangingState(stateMachine, closestPoint, ledgeForward, freeHanging,roomToClimbUp));

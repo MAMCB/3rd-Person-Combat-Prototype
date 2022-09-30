@@ -731,7 +731,7 @@ MonoBehaviour:
   <swordFallDamage>k__BackingField: 20
   <axeFallKnockbackForce>k__BackingField: 20
   <axeFallDamage>k__BackingField: 30
-  <freeHangGrabPointOffset>k__BackingField: -0.5
+  <freeHangGrabPointOffset>k__BackingField: 0
   <wallGrabPointOffset>k__BackingField: 0.5
   <SwordAttacks>k__BackingField:
   - <AnimationName>k__BackingField: Attack1
@@ -1956,8 +1956,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3c6b1fbcd016d647a4059f03d544747, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStateMachine: {fileID: 8547416039627031483}
   OnLimiter: 0
   limiterSide: 0
+  onLedge: 0
 --- !u!1 &3589735726937169935
 GameObject:
   m_ObjectHideFlags: 0

@@ -79,6 +79,7 @@ public class PlayerStateMachine : StateMachine
     public bool wasHanging = false;
     
     
+    
 
     public bool SwordActive = false;
     public bool AxeActive = false;
@@ -141,6 +142,9 @@ public class PlayerStateMachine : StateMachine
         Health.OnDie -= HandleDeath;
     }
 
+   
+
+    
    
 
 

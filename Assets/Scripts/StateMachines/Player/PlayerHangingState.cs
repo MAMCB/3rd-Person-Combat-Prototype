@@ -49,6 +49,7 @@ public class PlayerHangingState : PlayerBaseState
             stateMachine.Animator.CrossFadeInFixedTime(bracedHangingBlendTreeHash, CrossfadeDuration);
             stateMachine.InputReader.JumpEvent += OnJump;
         }
+        stateMachine.LedgeDetector.OnLedgeDetect += HandLedgeDetect;
     }
 
     public override void Tick(float deltatime)
@@ -87,7 +88,7 @@ public class PlayerHangingState : PlayerBaseState
         {
             stateMachine.InputReader.JumpEvent -= OnJump;
         }
-        
+        stateMachine.LedgeDetector.OnLedgeDetect -= HandLedgeDetect;
     }
 
     private Vector3 CalculateMovement(float deltatime)
@@ -118,5 +119,13 @@ public class PlayerHangingState : PlayerBaseState
     private void OnJump()
     {
         stateMachine.SwitchState(new PlayerJumpingState(stateMachine,true));
+    }
+
+    private void HandLedgeDetect(Vector3 closestPoint, Vector3 ledgeForward, bool freeHanging, bool roomToClimbUp)
+    {
+       
+            stateMachine.SwitchState(new PlayerHangingState(stateMachine, closestPoint, ledgeForward, freeHanging, roomToClimbUp));
+        
+
     }
 }

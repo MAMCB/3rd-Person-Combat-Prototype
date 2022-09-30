@@ -629,13 +629,13 @@ AnimatorStateMachine:
     m_Position: {x: 987.2842, y: -426.3021, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2018594137858894912}
-    m_Position: {x: 1270.0593, y: -423.0471, z: 0}
+    m_Position: {x: 1270, y: -420, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3796949329469845457}
     m_Position: {x: 950, y: -340, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2222274970998283717}
-    m_Position: {x: 1351.0284, y: -505.97467, z: 0}
+    m_Position: {x: 1350, y: -500, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2975824097028031155}
     m_Position: {x: 1070, y: -530, z: 0}
@@ -670,7 +670,7 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: fca0c303dccf0f14987305c1b8ff00cd, type: 2}
-  m_Tag: 
+  m_Tag: Jump
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
@@ -748,7 +748,7 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: 3ffd5fadef2f4c442afee2125edf1c08, type: 2}
-  m_Tag: Climbing
+  m_Tag: Jump
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
