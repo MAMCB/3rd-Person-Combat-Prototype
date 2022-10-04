@@ -1009,7 +1009,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cec98a38c7965034abd4a08b9381d16c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRoar: {fileID: 8300000, guid: 31cb67f3029869049b636750986a4fc6, type: 3}
+  attackRoarClips:
+  - {fileID: 8300000, guid: d1f8d4165dfa79a4fa92289d2d83d58f, type: 3}
+  - {fileID: 8300000, guid: de3785e61ac8c074e8f9470933e7f9ae, type: 3}
+  - {fileID: 8300000, guid: cc47d394ade5def4dac3043b144bc740, type: 3}
+  - {fileID: 8300000, guid: 3ec276d76ae71314f898d611f6dbfafa, type: 3}
+  - {fileID: 8300000, guid: 8332815109b433243a4e134868c6d46f, type: 3}
+  - {fileID: 8300000, guid: 8e4851963e3ebde4b948020b48d7cd78, type: 3}
+  - {fileID: 8300000, guid: a577c2325268be54488591a486be171a, type: 3}
+  - {fileID: 8300000, guid: 4abab8fa42f82594081b3013ed1040d8, type: 3}
 --- !u!1 &2574791437645676032
 GameObject:
   m_ObjectHideFlags: 0
