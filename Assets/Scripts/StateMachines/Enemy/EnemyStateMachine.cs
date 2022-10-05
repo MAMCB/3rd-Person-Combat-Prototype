@@ -27,6 +27,7 @@ public class EnemyStateMachine : StateMachine
     [field: SerializeField] public float MovementSpeed { get; private set; }
 
     public Health Player { get; private set; }
+    
     public bool AttackMissed;
 
     private void OnEnable()
