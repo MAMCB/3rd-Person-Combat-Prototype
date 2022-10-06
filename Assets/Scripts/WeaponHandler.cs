@@ -6,6 +6,7 @@ public class WeaponHandler : MonoBehaviour
 {
     [SerializeField] private GameObject WeaponLogicSword;
     [SerializeField] private GameObject WeaponLogicAxe;
+    [SerializeField] private GameObject[] multipleWeaponLogics;
 
     public void EnableWeaponSword()
     {
@@ -25,5 +26,21 @@ public class WeaponHandler : MonoBehaviour
     public void DisableWeaponAxe()
     {
         WeaponLogicAxe.SetActive(false);
+    }
+
+    public void EnableMultipleWeaponLogics()
+    {
+        foreach(GameObject gameObject in multipleWeaponLogics)
+        {
+            gameObject.SetActive(true);
+        }
+    }
+
+    public void DisableMultipleWeaponLogics()
+    {
+        foreach (GameObject gameObject in multipleWeaponLogics)
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

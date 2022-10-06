@@ -10,6 +10,7 @@ public class EnemyStateMachine : StateMachine
     [field: SerializeField] public NavMeshAgent NavMeshAgent { get; private set; }
 
     [field: SerializeField] public WeaponDamage Weapon { get; private set; }
+    [field: SerializeField] public WeaponDamage SecondaryWeapon { get; private set; }
     [field: SerializeField] public Health Health { get; private set; }
 
     [field: SerializeField] public Ragdoll Ragdoll { get; private set; }

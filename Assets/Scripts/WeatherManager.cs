@@ -5,6 +5,7 @@ using UnityEngine;
 public class WeatherManager : MonoBehaviour
 {
     [SerializeField] GameObject[] weatherTypes;
+    
     [SerializeField] int weatherIndex;
     GameObject currentWeather;
     PlayerStateMachine playerStateMachine;
