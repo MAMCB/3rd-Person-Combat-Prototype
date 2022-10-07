@@ -8,7 +8,8 @@ public class Targeter : MonoBehaviour
     [SerializeField] private CinemachineTargetGroup cineTargetGroup;
     private Camera MainCamera;
     public List<Target> targets = new List<Target>();
-  [field: SerializeField]  public Target currentTarget{ get; private set; }
+    int targetIndex = 0;
+    [field: SerializeField]  public Target currentTarget{ get; private set; }
 
     private void Start()
     {
@@ -84,6 +85,27 @@ public class Targeter : MonoBehaviour
         {
             currentTarget = targets[0];
         }
+    }
+
+    public void NextTarget()
+    {
+        
+        targetIndex++;
+        if(targetIndex>=targets.Count-1)
+        {
+            targetIndex = 0;
+        }
+        currentTarget = targets[targetIndex];
+    }
+
+    public void PreviousTarget()
+    {
+        targetIndex--;
+        if (targetIndex <= 0)
+            {
+                targetIndex = targets.Count - 1;
+            }
+        currentTarget = targets[targetIndex];
     }
 }
 

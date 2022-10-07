@@ -8,6 +8,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 {
     public Vector2 MovementValue { get; private set; } // public for reading but private for setting
     public Vector2 LookValue { get; private set; }
+    public Vector2 ScrollValue { get; private set; }
     public event Action JumpEvent;
     public bool Weapon1;
     public bool Weapon2;
@@ -48,6 +49,8 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
         MovementValue = context.ReadValue<Vector2>();
         
     }
+
+    
 
     public void OnLook(InputAction.CallbackContext context)
     {
@@ -122,5 +125,10 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
         {
             IsBlocking = false;
         }
+    }
+
+    public void OnTargetSelect(InputAction.CallbackContext context)
+    {
+        ScrollValue = context.ReadValue<Vector2>();
     }
 }

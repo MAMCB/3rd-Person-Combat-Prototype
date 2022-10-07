@@ -125,6 +125,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TargetSelect"",
+                    ""type"": ""Value"",
+                    ""id"": ""d93f5809-c043-4fda-aaf1-e94f115eca70"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -424,6 +433,17 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""Block"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""af5d0bd3-ec76-489b-bb8c-5b4cea2f20c0"",
+                    ""path"": ""<Mouse>/scroll"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""TargetSelect"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -471,6 +491,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Player_SheatWeapon = m_Player.FindAction("SheatWeapon", throwIfNotFound: true);
         m_Player_Weapon2 = m_Player.FindAction("Weapon2", throwIfNotFound: true);
         m_Player_Block = m_Player.FindAction("Block", throwIfNotFound: true);
+        m_Player_TargetSelect = m_Player.FindAction("TargetSelect", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -541,6 +562,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_SheatWeapon;
     private readonly InputAction m_Player_Weapon2;
     private readonly InputAction m_Player_Block;
+    private readonly InputAction m_Player_TargetSelect;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -556,6 +578,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @SheatWeapon => m_Wrapper.m_Player_SheatWeapon;
         public InputAction @Weapon2 => m_Wrapper.m_Player_Weapon2;
         public InputAction @Block => m_Wrapper.m_Player_Block;
+        public InputAction @TargetSelect => m_Wrapper.m_Player_TargetSelect;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -598,6 +621,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Block.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBlock;
                 @Block.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBlock;
                 @Block.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBlock;
+                @TargetSelect.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTargetSelect;
+                @TargetSelect.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTargetSelect;
+                @TargetSelect.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTargetSelect;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -635,6 +661,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Block.started += instance.OnBlock;
                 @Block.performed += instance.OnBlock;
                 @Block.canceled += instance.OnBlock;
+                @TargetSelect.started += instance.OnTargetSelect;
+                @TargetSelect.performed += instance.OnTargetSelect;
+                @TargetSelect.canceled += instance.OnTargetSelect;
             }
         }
     }
@@ -670,5 +699,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnSheatWeapon(InputAction.CallbackContext context);
         void OnWeapon2(InputAction.CallbackContext context);
         void OnBlock(InputAction.CallbackContext context);
+        void OnTargetSelect(InputAction.CallbackContext context);
     }
 }

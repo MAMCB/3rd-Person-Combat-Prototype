@@ -60,7 +60,15 @@ public class PlayerTargetingState : PlayerBaseState
             stateMachine.InputReader.SheatWeapon = false;
         }
 
-        
+        if(stateMachine.InputReader.ScrollValue.y>0f)
+        {
+            stateMachine.Targeter.NextTarget();
+        }
+
+        if (stateMachine.InputReader.ScrollValue.y < 0f)
+        {
+            stateMachine.Targeter.PreviousTarget();
+        }
 
     }
 
