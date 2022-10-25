@@ -7,6 +7,7 @@ public class Health : MonoBehaviour
 {
     [SerializeField] private int MaxHealth = 100;
     [SerializeField] bool isPlayer;
+    [SerializeField] HealthBar healthBar;
     private int health;
     public event Action OnTakeDamage;
     public event Action OnDie;
@@ -16,6 +17,18 @@ public class Health : MonoBehaviour
     void Start()
     {
         health = MaxHealth;
+        if (isPlayer) { healthBar.SetMaxHealth(MaxHealth); }
+        
+    }
+
+    private void Update()
+    {
+        if (isPlayer)
+        {
+            healthBar.SetHealth(health);
+        }
+        
+        
     }
 
     public void DealDamage(int damage)

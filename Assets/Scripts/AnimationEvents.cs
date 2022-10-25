@@ -10,6 +10,7 @@ public class AnimationEvents : MonoBehaviour
     [SerializeField] GameObject Axe1;
     [SerializeField] GameObject Axe2;
     [SerializeField] AudioClip swordSheatsound;
+    [SerializeField] AudioClip[] footsteps;
 
     AudioSource audioSource;
 
@@ -62,5 +63,11 @@ public class AnimationEvents : MonoBehaviour
         Axe2.SetActive(true);
         stateMachine.InputReader.SheatWeapon = false;
 
+    }
+
+    public void PlayFootstepsEvent()
+    {
+        audioSource.clip = footsteps[Random.Range(0, footsteps.Length)];
+        audioSource.Play();
     }
 }
