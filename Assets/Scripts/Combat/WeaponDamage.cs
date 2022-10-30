@@ -10,6 +10,7 @@ public class WeaponDamage : MonoBehaviour
     [SerializeField] AudioSource audioSource;
     [SerializeField] EnemyStateMachine enemyStateMachine;
     [SerializeField] bool isEnemy = false;
+    [SerializeField] BloodDecalManager bodyBloodManager;
     private int damage;
     private float knockback;
 
@@ -35,7 +36,12 @@ public class WeaponDamage : MonoBehaviour
             
             health.DealDamage(damage);
             audioSource.PlayOneShot(hitSounds[Random.Range(0, hitSounds.Length)]);
-
+            health.ActivateBloodEffect();
+            if(!isEnemy)
+            {
+                bodyBloodManager.IncreaseBloodStains();
+            }
+            
         }
         else
         {
@@ -54,6 +60,8 @@ public class WeaponDamage : MonoBehaviour
 
         
     }
+
+   
 
     public void SetAttack(int damage, float knockback)
     {

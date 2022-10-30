@@ -8,6 +8,7 @@ public class Health : MonoBehaviour
     [SerializeField] private int MaxHealth = 100;
     [SerializeField] bool isPlayer;
     [SerializeField] HealthBar healthBar;
+    [SerializeField] GameObject bloodEffect;
     private int health;
     public event Action OnTakeDamage;
     public event Action OnDie;
@@ -56,5 +57,15 @@ public class Health : MonoBehaviour
         this.isInvulnerable = isInvulnerable;
     }
 
-    
+    public void ActivateBloodEffect()
+    {
+        bloodEffect.SetActive(true);
+        StartCoroutine(DeactivateEffect(bloodEffect));
+    }
+
+    IEnumerator DeactivateEffect(GameObject effect)
+    {
+        yield return new WaitForSeconds(0.5f);
+        effect.SetActive(false);
+    }
 }

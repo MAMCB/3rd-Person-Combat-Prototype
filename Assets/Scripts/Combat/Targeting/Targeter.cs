@@ -16,12 +16,21 @@ public class Targeter : MonoBehaviour
         MainCamera = Camera.main;
     }
 
+    private void Update()
+    {
+        if(currentTarget != null)
+        {
+            currentTarget.ActivateLockOn();
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if(!other.TryGetComponent<Target>(out Target target)) { return; }
         
             targets.Add(target);
         target.OnDestroyed += RemoveTarget;
+        
         
     }
 
@@ -57,7 +66,8 @@ public class Targeter : MonoBehaviour
 
         if(closestTarget==null) { return false; }
 
-        currentTarget = closestTarget;
+        currentTarget= closestTarget;
+        
         cineTargetGroup.AddMember(currentTarget.transform, 1f, 2f);
         return true;
     }
@@ -66,19 +76,23 @@ public class Targeter : MonoBehaviour
     {
         if (currentTarget == null) { return; }
         cineTargetGroup.RemoveMember(currentTarget.transform);
+        currentTarget.DeactivateLockOn();
         currentTarget = null;
     }
 
     private void RemoveTarget(Target target)
     {
+        
         if(currentTarget==target)
         {
             cineTargetGroup.RemoveMember(currentTarget.transform);
             
             currentTarget = null;
+            
         }
 
         target.OnDestroyed -= RemoveTarget;
+       
         targets.Remove(target);
         
         if(targets.Count!=0)
@@ -95,17 +109,26 @@ public class Targeter : MonoBehaviour
         {
             targetIndex = 0;
         }
-        currentTarget = targets[targetIndex];
+        currentTarget= targets[targetIndex];
+        
+       
+        
     }
 
     public void PreviousTarget()
     {
+        
         targetIndex--;
         if (targetIndex <= 0)
             {
                 targetIndex = targets.Count - 1;
             }
         currentTarget = targets[targetIndex];
+        
+
+
     }
+
+   
 }
 
