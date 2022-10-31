@@ -22,15 +22,16 @@ public class PlayerBlockingState : PlayerBaseState
         FaceTarget();
         if (!stateMachine.InputReader.IsBlocking)
         {
-            stateMachine.SwitchState(new PlayerTargetingState(stateMachine));
-            return;
+            ReturnToLocomotion();
+            //stateMachine.SwitchState(new PlayerTargetingState(stateMachine));
+            //return;
         }
 
-        if(stateMachine.Targeter.currentTarget==null)
-        {
-            stateMachine.SwitchState(new PlayerFreeLookState(stateMachine));
-            return;
-        }
+        //if(stateMachine.Targeter.currentTarget==null)
+        //{
+        //    stateMachine.SwitchState(new PlayerFreeLookState(stateMachine));
+        //    return;
+        //}
     }
 
     public override void Exit()

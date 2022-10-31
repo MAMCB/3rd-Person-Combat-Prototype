@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -49,6 +50,7 @@ public class PlayerFreeLookState : PlayerBaseState
         stateMachine.InputReader.JumpEvent += OnJump;
         
         
+        
         freeLookMovementSpeed = stateMachine.FreeLookMovementWalkingSpeed;
         
         
@@ -62,6 +64,7 @@ public class PlayerFreeLookState : PlayerBaseState
         CheckWeapon2Input();
 
         CheckSheatWeaponInput();
+        CheckBlockInput();
         if (stateMachine.InputReader.IsAttacking && stateMachine.WeaponActive)
         {
             stateMachine.SwitchState(new PlayerAttackingState(stateMachine, 0));
@@ -103,8 +106,16 @@ public class PlayerFreeLookState : PlayerBaseState
         stateMachine.Animator.SetFloat(FreeLookSpeedHash, animatorFloatValue, AnimatorDampTime, deltatime);
         FaceMovementDirection(movement, deltatime);
         
+       
 
+    }
 
+    private void CheckBlockInput()
+    {
+        if (stateMachine.InputReader.IsBlocking)
+        {
+            stateMachine.SwitchState(new PlayerBlockingState(stateMachine));
+        }
     }
 
     private void CheckSheatWeaponInput()

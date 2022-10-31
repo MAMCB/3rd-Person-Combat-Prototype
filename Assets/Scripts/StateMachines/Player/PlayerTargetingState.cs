@@ -29,7 +29,7 @@ public class PlayerTargetingState : PlayerBaseState
             stateMachine.audioSource.Play();
             stateMachine.isBattleSoundPlaying = true;
         }
-       
+        stateMachine.Targeter.inTargetingState = true;
     }
 
     public override void Tick(float deltatime)
@@ -79,7 +79,7 @@ public class PlayerTargetingState : PlayerBaseState
         stateMachine.InputReader.TargetEvent -= OnTarget;
         //stateMachine.InputReader.DodgeEvent -= OnDodge;
         stateMachine.InputReader.JumpEvent -= OnJump;
-
+        stateMachine.Targeter.inTargetingState = false;
 
     }
 

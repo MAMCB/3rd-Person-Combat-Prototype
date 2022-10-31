@@ -9,6 +9,7 @@ public class Targeter : MonoBehaviour
     private Camera MainCamera;
     public List<Target> targets = new List<Target>();
     int targetIndex = 0;
+    public bool inTargetingState = false;
     [field: SerializeField]  public Target currentTarget{ get; private set; }
 
     private void Start()
@@ -18,9 +19,20 @@ public class Targeter : MonoBehaviour
 
     private void Update()
     {
-        if(currentTarget != null)
+        if(targets.Count != 0 &&inTargetingState)
         {
-            currentTarget.ActivateLockOn();
+           foreach(Target target in targets)
+            {
+                if(target.name == currentTarget.name)
+                {
+                    target.ActivateLockOn();
+                    Debug.Log(target.name + "is locked");
+                }
+                else
+                {
+                    target.DeactivateLockOn();  
+                }
+            }
         }
     }
 
@@ -95,7 +107,7 @@ public class Targeter : MonoBehaviour
        
         targets.Remove(target);
         
-        if(targets.Count!=0)
+        if(targets.Count!=0 && inTargetingState)
         {
             currentTarget = targets[0];
         }
